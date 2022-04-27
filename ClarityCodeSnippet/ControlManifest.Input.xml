@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
   <control namespace="ClarityNameSpace" constructor="ClarityCodeSnippet" version="1.0.0" display-name-key="ClarityCodeSnippet" description-key="Clarity Component to track your app screen" control-type="standard" >
-    <property name="YourClarityProjectID" display-name-key="bihyolfhem" description-key="bihyolfhem" of-type="SingleLine.Text" usage="bound" required="true" />
+    <property name="YourClarityProjectID" display-name-key="<your clarity project id>" description-key="description" of-type="SingleLine.Text" usage="bound" required="true" />
     <external-service-usage enabled="false">
     </external-service-usage>
     <resources>
