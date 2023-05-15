@@ -20,17 +20,18 @@ private _Container: HTMLDivElement;
      */
     public init(context: ComponentFramework.Context<IInputs>, notifyOutputChanged: () => void, state: ComponentFramework.Dictionary, container:HTMLDivElement): void
     {
+           // script.crossOrigin allows trackers to be added when track policy is set to a non-strict setting
         const head = document.getElementsByTagName('head')[0];
         const script = document.createElement('script');
-        script.innerHTML = '(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "<your clarity project id>");'
+        script.crossOrigin = "anonymous";
+           // MyClarityKey dynamically retrieves the key, and the ClarityScript concatenates it into the string
+        const MyClarityKey = context.parameters.clarityKey.raw;
+        const ClarityScript = '(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "' + YourClarityProjectID + '");'
+        script.innerHTML = ClarityScript
         head.insertBefore(script, head.firstChild);
-        const textDiv = "<div>We track this app with Microsoft Clarity</div>"
-       
-       
         this._Container = document.createElement("div");
         this._Container.id = "ClarityDivID";
-        this._Container.innerHTML = textDiv;
-        
+        this._Container.innerText = ClarityScript;
         container.appendChild(this._Container);
     }
 
